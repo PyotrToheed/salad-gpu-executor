@@ -1,0 +1,26 @@
+# GitLab CI/CD Pipeline for Docker Build
+# Builds and pushes to Docker Hub
+
+stages:
+  - build
+
+variables:
+  DOCKER_IMAGE: pyotrtoheed/salad-gpu-executor
+  DOCKER_TLS_CERTDIR: "/certs"
+
+build-and-push:
+  stage: build
+  image: docker:24.0.5
+  services:
+    - docker:24.0.5-dind
+  before_script:
+    - docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_TOKEN"
+  script:
+    - docker build -t $DOCKER_IMAGE:latest -t $DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - docker push $DOCKER_IMAGE:latest
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA
+    - echo "✅ Image pushed successfully to Docker Hub!"
+    - echo "Image available at docker.io/$DOCKER_IMAGE:latest"
+  only:
+    - main
+    - master
