@@ -19,7 +19,7 @@ contextily>=1.4.0
 
 # Visualization themes
 morethemes==0.1.0
-mplcyberpunk==0.3.1
+mplcyberpunk
 
 # AWS S3 integration
 boto3>=1.33.0
