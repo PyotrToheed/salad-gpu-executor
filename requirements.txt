@@ -1,4 +1,10 @@
 # Python dependencies for Salad Cloud GPU Instance
+
+# GPU Acceleration (Critical)
+torch --index-url https://download.pytorch.org/whl/cu121
+torchaudio --index-url https://download.pytorch.org/whl/cu121
+torchvision --index-url https://download.pytorch.org/whl/cu121
+
 # FastAPI and server
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
